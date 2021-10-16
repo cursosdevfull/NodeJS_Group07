@@ -1,14 +1,18 @@
 import { Application } from 'express';
-import app from '../app';
 import http, { Server } from 'http';
+import { AbstractServer } from '../shared/classes/abstract-server.class';
+import { IServer } from '../shared/interfaces/server.interface';
 
-export default class ServerBootstrap {
+export default class ServerBootstrap extends AbstractServer {
+  //export default class ServerBootstrap implements IServer {
   /*   app;
   constructor(app: Application) {
     this.app = app;
   } */
 
-  constructor(private app: Application) {}
+  constructor(private app: Application) {
+    super();
+  }
 
   initialize(): Promise<unknown> {
     const promise = new Promise((resolve, reject) => {

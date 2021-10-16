@@ -7,7 +7,28 @@ import ServerBootstrap from './bootstrap/server.bootstrap';
 const serverBootstrap = new ServerBootstrap(app);
 
 /* try { */
-serverBootstrap.initialize().then(
+
+(async () => {
+  try {
+    const response = await serverBootstrap.initialize();
+    console.log('fin de initialize', response);
+  } catch (error) {
+    console.log(error);
+  }
+})();
+
+/* const start = async () => {
+  try {
+    const response = await serverBootstrap.initialize();
+    console.log('fin de initialize', response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start(); */
+
+/* serverBootstrap.initialize().then(
   (response: boolean) => {
     console.log('response', response);
     console.log('Confirm... server is running');
@@ -15,7 +36,7 @@ serverBootstrap.initialize().then(
   (error) => {
     console.log('Is true... the server is not running');
   }
-);
+); */
 // server.listen(3000, () => console.log('Server is running on port 3000'));
 /* } catch (error) {
   console.log('Ocurrió un error');
