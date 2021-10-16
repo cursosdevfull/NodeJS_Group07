@@ -1,38 +1,22 @@
-import http from 'http';
-import express, { Application } from 'express';
+// import http from 'http';
+import app from './app';
+import ServerBootstrap from './bootstrap/server.bootstrap';
 
-const app: Application = express();
+// const server: http.Server = http.createServer(app);
 
-app.get('/home', (req, res) => {
-  res.type('text/plain').status(200).send('Hello World');
-});
+const serverBootstrap = new ServerBootstrap(app);
 
-app.get('/users', (req, res) => {
-  const users = [
-    { name: 'John', age: 20 },
-    { name: 'Bob', age: 30 },
-  ];
-
-  res.json(users);
-
-  /*   res.setHeader("content-type", "application/json");
-  res.statusCode = 200;
-  res.send(JSON.stringify(users)); */
-});
-
-app.post('/users', (req, res) => {
-  const users = [
-    { name: 'Carol', age: 20 },
-    { name: 'Brad', age: 30 },
-  ];
-
-  res.json(users);
-
-  /*   res.setHeader("content-type", "application/json");
-  res.statusCode = 200;
-  res.send(JSON.stringify(users)); */
-});
-
-const server: http.Server = http.createServer(app);
-
-server.listen(3000, () => console.log('Server is running on port 3000'));
+/* try { */
+serverBootstrap.initialize().then(
+  (response: boolean) => {
+    console.log('response', response);
+    console.log('Confirm... server is running');
+  },
+  (error) => {
+    console.log('Is true... the server is not running');
+  }
+);
+// server.listen(3000, () => console.log('Server is running on port 3000'));
+/* } catch (error) {
+  console.log('Ocurrió un error');
+} */
