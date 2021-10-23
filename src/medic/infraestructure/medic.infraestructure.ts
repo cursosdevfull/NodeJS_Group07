@@ -13,4 +13,6 @@ export class MedicInfraestructure
   override list(): MedicModel[] {
     return [];
   }
+
+  getPC(cmp: string) {}
 }

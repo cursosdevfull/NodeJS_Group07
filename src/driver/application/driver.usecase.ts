@@ -1,10 +1,13 @@
+import { BaseUseCase } from '../../shared/application/base-usecase.class';
 import { DriverModel } from '../domain/driver.model';
 import { DriverInfraestructureInterface } from './dirverinfraestructure.interface';
+import { DriverUseCaseInterface } from './driver.usecase.interface';
 
-export class DriverUseCase {
-  constructor(private infra: DriverInfraestructureInterface) {}
-
-  insert(driver: DriverModel) {
-    return this.infra.insert(driver);
+export class DriverUseCase
+  extends BaseUseCase<DriverModel, DriverInfraestructureInterface>
+  implements DriverUseCaseInterface
+{
+  constructor(private infraestructure: DriverInfraestructureInterface) {
+    super(infraestructure);
   }
 }
