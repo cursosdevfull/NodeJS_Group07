@@ -1,17 +1,19 @@
 import { BaseRepository } from '../application/base.repository';
 
 export abstract class BaseInfraestructure<T> implements BaseRepository<T> {
-  list(): T[] {
+  list(): Promise<T[]> {
     throw new Error('Method not implemented.');
   }
-  update(id: number, entity: T): T {
+  update(id: number, entity: Partial<T>): Promise<T> {
     throw new Error('Method not implemented.');
   }
-  delete(id: number): T {
+  delete(id: number): Promise<T> {
     throw new Error('Method not implemented.');
   }
-  getOne(id: number): T {
+  getOne(id: number): Promise<T> {
     throw new Error('Method not implemented.');
   }
-  insert(entity: T) {}
+  insert(entity: Partial<T>): Promise<T> {
+    throw new Error('Method not implemented.');
+  }
 }
