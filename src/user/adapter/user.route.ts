@@ -1,4 +1,5 @@
-import express, { Router, Request, Response } from 'express';
+import express, { Router, Request, Response, NextFunction } from 'express';
+import { mergeParameters } from '../../shared/helpers/parameters.helper';
 import { UserController } from './user.controller';
 
 const route: Router = express.Router();
@@ -8,6 +9,6 @@ const controller = new UserController();
   controller.list(req, res);
 }); */
 
-route.get('/', controller.list);
+route.get('/:id', mergeParameters(), controller.list);
 
 export { route };
