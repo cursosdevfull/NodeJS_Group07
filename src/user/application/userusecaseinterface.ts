@@ -1,4 +1,5 @@
 import { BaseUseCaseInterface } from '../../shared/application/base-usecase.interface';
-import { UserModel } from '../domain/user.model';
+import { UserResponseDto } from './user-response.dto';
 
-export interface UserUseCaseInterface extends BaseUseCaseInterface<UserModel> {}
+export interface UserUseCaseInterface
+  extends BaseUseCaseInterface<UserResponseDto> {}

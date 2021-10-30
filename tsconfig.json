@@ -9,7 +9,11 @@
     "sourceMap": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "outDir": "./cache"
+    "outDir": "./cache",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@mocks/*": ["./src/mocks/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.ts"]
