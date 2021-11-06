@@ -7,7 +7,6 @@ const userUseCase = new UserUseCase(userInfraestructure);
 
 export class UserController {
   async list(req: Request, res: Response) {
-    console.log('parameters read', res.locals);
     const listUsers = await userUseCase.list();
     res.json(listUsers);
     // userUseCase.list().then((listUsers) => res.json(listUsers));

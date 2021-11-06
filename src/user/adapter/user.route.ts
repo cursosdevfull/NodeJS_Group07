@@ -1,14 +1,18 @@
-import express, { Router, Request, Response, NextFunction } from 'express';
+import express, { Router } from 'express';
 import { mergeParameters } from '../../shared/helpers/parameters.helper';
 import { UserController } from './user.controller';
+import { validateParameters } from 'validate_parameters/lib';
+
+import { UserSchema } from './user.schema';
 
 const route: Router = express.Router();
 const controller = new UserController();
 
-/* route.get('/', (req: Request, res: Response) => {
-  controller.list(req, res);
-}); */
-
-route.get('/:id', mergeParameters(), controller.list);
+route.post(
+  '/:id',
+  mergeParameters,
+  validateParameters(UserSchema),
+  controller.list
+);
 
 export { route };
