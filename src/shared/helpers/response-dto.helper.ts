@@ -25,7 +25,7 @@ export class ResponseDtoBuilder<T> {
     return this;
   }
 
-  setData(data: T | T[]) {
+  setData(data: T | T[] | any) {
     this._data = data;
     return this;
   }

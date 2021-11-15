@@ -1,24 +1,37 @@
+import { CHANNELS, ResponseDtoBuilder } from '../helpers/response-dto.helper';
 import { Result } from '../helpers/result.helper';
 import { BaseUseCaseInterface } from './base-usecase.interface';
 import { BaseRepository } from './base.repository';
 
 export abstract class BaseUseCase<T, X, U extends BaseRepository<X>>
-  implements BaseUseCaseInterface<T>
+  implements BaseUseCaseInterface<T, X>
 {
-  constructor(protected instance: U) {}
-  insert(entity: Partial<T>): Promise<Result<T>> {
-    throw new Error('Method not implemented.');
-    // return this.instance.insert(entity);
+  constructor(
+    protected instance: U,
+    protected mapping: (data: X | X[]) => T | T[],
+    protected traceId: string
+  ) {}
+  async insert(entity: Partial<X>): Promise<Result<T>> {
+    const data = await this.instance.insert(entity);
+
+    return new ResponseDtoBuilder<T>()
+      .setStatusCode(200)
+      .setTraceId(this.traceId)
+      .setData(data)
+      .setName('UserUseCase.insert')
+      .setChannel(CHANNELS.TEAM1)
+      .build();
   }
-  list(): Promise<Result<T>> {
-    /*     const promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve([]);
-      }, 5000);
-    });
-    return promise as Promise<T[]>; */
-    throw new Error('Method not implemented.');
-    //return this.instance.list();
+  async list(): Promise<Result<T>> {
+    const data = await this.instance.list();
+    console.log('data', data);
+    return new ResponseDtoBuilder<T>()
+      .setStatusCode(200)
+      .setTraceId(this.traceId)
+      .setData(this.mapping(data))
+      .setName('UserUseCase.list')
+      .setChannel(CHANNELS.TEAM1)
+      .build();
   }
   update(id: number, entity: Partial<T>): Promise<Result<T>> {
     throw new Error('Method not implemented.');

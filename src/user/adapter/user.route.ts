@@ -8,11 +8,13 @@ import { UserSchema } from './user.schema';
 const route: Router = express.Router();
 const controller = new UserController();
 
+route.get('/', mergeParameters, controller.list);
+
 route.post(
-  '/:id',
+  '/',
   mergeParameters,
-  validateParameters(UserSchema),
-  controller.list
+  validateParameters(UserSchema.POST),
+  controller.insert
 );
 
 export { route };

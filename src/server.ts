@@ -7,9 +7,8 @@ const instance = DatabaseBootstrap.getInstance();
 
 (async () => {
   try {
-    const response = await serverBootstrap.initialize();
+    await serverBootstrap.initialize();
     await instance.getDB();
-    console.log('fin de initialize', response);
   } catch (error) {
     console.log(error);
   }
