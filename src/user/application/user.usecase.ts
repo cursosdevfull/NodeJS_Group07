@@ -1,25 +1,22 @@
-import { BaseUseCase } from '../../shared/application/base-usecase.class';
-import { UserModel } from '../domain/user.model';
-import { UserInfraestructureInterface } from './userinfraestructure.interface';
-import { UserUseCaseInterface } from './userusecaseinterface';
-import { mappingUserDto, UserResponseDto } from './user-response.dto';
-import { Result } from '../../shared/helpers/result.helper';
+import { BaseUseCase } from "../../shared/application/base-usecase.class";
+import { UserModel } from "../domain/user.model";
+import { UserInfraestructureInterface } from "./userinfraestructure.interface";
+import { UserUseCaseInterface } from "./userusecaseinterface";
+import { mappingUserDto, UserResponseDto } from "./user-response.dto";
+import { Result } from "../../shared/helpers/result.helper";
 import {
   CHANNELS,
   ResponseDtoBuilder,
-} from '../../shared/helpers/response-dto.helper';
-import { ResultSetHeader } from '../../shared/application/resultSetHeader.interface';
-import { UserService } from './user.service';
+} from "../../shared/helpers/response-dto.helper";
+import { ResultSetHeader } from "../../shared/application/resultSetHeader.interface";
+import { UserService } from "./user.service";
 
 export class UserUseCase
-  extends BaseUseCase<UserResponseDto, UserModel, UserInfraestructureInterface>
+  extends BaseUseCase<UserModel, UserInfraestructureInterface>
   implements UserUseCaseInterface
 {
-  constructor(
-    private infraestructure: UserInfraestructureInterface,
-    protected traceId: string
-  ) {
-    super(infraestructure, mappingUserDto, traceId);
+  constructor(private infraestructure: UserInfraestructureInterface) {
+    super(infraestructure);
   }
 
   override async insert(
@@ -33,13 +30,13 @@ export class UserUseCase
 
     const result = await this.instance.insertUserRole(idUser, entity);
 
-    console.log('result', result);
+    console.log("result", result);
 
     return new ResponseDtoBuilder<UserResponseDto>()
       .setStatusCode(200)
       .setTraceId(this.traceId)
       .setData(result)
-      .setName('UserUseCase.insert')
+      .setName("UserUseCase.insert")
       .setChannel(CHANNELS.TEAM1)
       .build();
   }

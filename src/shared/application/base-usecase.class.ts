@@ -1,45 +1,51 @@
-import { CHANNELS, ResponseDtoBuilder } from '../helpers/response-dto.helper';
-import { Result } from '../helpers/result.helper';
-import { BaseUseCaseInterface } from './base-usecase.interface';
-import { BaseRepository } from './base.repository';
+import { CHANNELS, ResponseDtoBuilder } from "../helpers/response-dto.helper";
+import { Result } from "../helpers/result.helper";
+import { BaseUseCaseInterface } from "./base-usecase.interface";
+import { BaseRepository } from "./base.repository";
 
-export abstract class BaseUseCase<T, X, U extends BaseRepository<X>>
-  implements BaseUseCaseInterface<T, X>
-{
-  constructor(
-    protected instance: U,
-    protected mapping: (data: X | X[]) => T | T[],
-    protected traceId: string
-  ) {}
-  async insert(entity: Partial<X>): Promise<Result<T>> {
-    const data = await this.instance.insert(entity);
+export abstract class BaseUseCase<T, U extends BaseRepository<T>> {
+  constructor(protected instance: U) {}
 
-    return new ResponseDtoBuilder<T>()
-      .setStatusCode(200)
-      .setTraceId(this.traceId)
-      .setData(data)
-      .setName('UserUseCase.insert')
-      .setChannel(CHANNELS.TEAM1)
-      .build();
+  async list(
+    where: object = {},
+    relations: string[] = [],
+    order: object = {}
+  ): Promise<Result<T>> {
+    return await this.instance.list(where, relations, order);
   }
-  async list(): Promise<Result<T>> {
-    const data = await this.instance.list();
-    console.log('data', data);
-    return new ResponseDtoBuilder<T>()
-      .setStatusCode(200)
-      .setTraceId(this.traceId)
-      .setData(this.mapping(data))
-      .setName('UserUseCase.list')
-      .setChannel(CHANNELS.TEAM1)
-      .build();
+
+  async listOne(
+    where: object = {},
+    relations: string[] = []
+  ): Promise<Result<T>> {
+    return await this.instance.listOne(where, relations);
   }
-  update(id: number, entity: Partial<T>): Promise<Result<T>> {
-    throw new Error('Method not implemented.');
+
+  async listByPage(
+    page: number,
+    pageSize: number,
+    where: object = {},
+    relations: string[] = [],
+    order: object = {}
+  ): Promise<Result<T>> {
+    return await this.instance.listByPage(
+      page,
+      pageSize,
+      where,
+      relations,
+      order
+    );
   }
-  delete(id: number): Promise<Result<T>> {
-    throw new Error('Method not implemented.');
+
+  async create(entity: T): Promise<Result<T>> {
+    return await this.instance.create(entity);
   }
-  getOne(id: number): Promise<Result<T>> {
-    throw new Error('Method not implemented.');
+
+  async update(entity: T, where: object = {}): Promise<Result<T>> {
+    return await this.instance.update(entity, where);
+  }
+
+  async delete(where: object): Promise<Result<T>> {
+    return await this.instance.delete(where);
   }
 }

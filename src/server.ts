@@ -1,6 +1,8 @@
-import app from './app';
-import ServerBootstrap from './bootstrap/server.bootstrap';
-import DatabaseBootstrap from './bootstrap/database.bootstrap';
+import "reflect-metadata";
+
+import app from "./app";
+import ServerBootstrap from "./bootstrap/server.bootstrap";
+import DatabaseBootstrap from "./bootstrap/database.bootstrap";
 
 const serverBootstrap = new ServerBootstrap(app);
 const instance = DatabaseBootstrap.getInstance();
