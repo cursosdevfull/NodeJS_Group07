@@ -1,6 +1,6 @@
 FROM node:16.13-alpine3.13 as stageBuild
 
-ADD package*.json /tmp
+ADD package*.json /tmp/
 
 RUN cd /tmp && npm install
 
