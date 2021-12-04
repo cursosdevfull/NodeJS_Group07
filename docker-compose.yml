@@ -13,6 +13,23 @@ services:
       MYSQL_PASSWORD: "test"
     volumes:
       - mysql-curso:/var/lib/mysql
+    networks:
+      - curso-net
+
+  server:
+    container_name: server-nodejs
+    image: cursonodejs
+    build: .
+    ports:
+      - "80:80"
+    depends_on:
+      - "db"
+    restart: always
+    networks:
+      - curso-net
 
 volumes:
   mysql-curso:
+
+networks:
+  curso-net:

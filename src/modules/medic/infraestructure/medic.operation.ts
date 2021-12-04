@@ -1,4 +1,4 @@
-import Medic from "../../../entities/user.entity";
+import { Medic } from "../../../entities/medic.entity";
 import OperationBase from "../../shared/infraestructure/base.operation";
 import MedicModel from "../domain/medic.model";
 
