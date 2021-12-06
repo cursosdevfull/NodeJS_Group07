@@ -1,6 +1,6 @@
-import RoleUseCase from "../application/role.usecase";
-import { Request, Response } from "express";
-import RoleModel from "../domain/role.model";
+import RoleUseCase from '../application/role.usecase';
+import { Request, Response } from 'express';
+import RoleModel from '../domain/role.model';
 
 export default class RoleController {
   constructor(private useCase: RoleUseCase) {}

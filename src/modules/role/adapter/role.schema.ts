@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 const paramId = Joi.object({
   id: Joi.number().required(),

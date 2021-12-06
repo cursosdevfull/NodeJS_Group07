@@ -1,10 +1,10 @@
-import RoleRepository from "../../role/application/role.repository";
-import RoleModel from "../../role/domain/role.model";
-import UseCaseBase from "../../shared/application/base.usecase";
-import Result from "../../shared/application/result.interface";
-import UserModel from "../domain/user.model";
-import UserRepository from "./user.repository";
-import UserService from "./user.service";
+import RoleRepository from '../../role/application/role.repository';
+import RoleModel from '../../role/domain/role.model';
+import UseCaseBase from '../../shared/application/base.usecase';
+import Result from '../../shared/application/result.interface';
+import UserModel from '../domain/user.model';
+import UserRepository from './user.repository';
+import UserService from './user.service';
 
 export default class UserUseCase extends UseCaseBase<
   UserModel,

@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 const paramId = Joi.object({
   id: Joi.number().required(),
@@ -17,7 +17,7 @@ const schemas = {
       password: Joi.string()
         .pattern(
           new RegExp(
-            "'(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#?$%^&*])(?=.{8,})'"
+            /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#?$%^&*])(?=.{8,})/
           )
         )
         .required(),
@@ -31,7 +31,7 @@ const schemas = {
       email: Joi.string().email(),
       password: Joi.string().pattern(
         new RegExp(
-          "'(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#?$%^&*])(?=.{8,})'"
+          /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#?$%^&*])(?=.{8,})/
         )
       ),
       photo: Joi.string(),

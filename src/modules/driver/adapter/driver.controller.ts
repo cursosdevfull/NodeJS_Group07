@@ -1,12 +1,12 @@
-import UserUseCase from "../application/driver.usecase";
-import { Request, Response } from "express";
-import DriverModel from "../domain/driver.model";
+import UserUseCase from '../application/driver.usecase';
+import { Request, Response } from 'express';
+import DriverModel from '../domain/driver.model';
 
 export default class DriverController {
   constructor(private useCase: UserUseCase) {}
 
   async list(req: Request, res: Response) {
-    const result = await this.useCase.list({}, ["roles"]);
+    const result = await this.useCase.list({}, ['roles']);
     res.json(result);
   }
 

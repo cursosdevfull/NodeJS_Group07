@@ -1,12 +1,12 @@
-import UserUseCase from "../application/user.usecase";
-import { Request, Response } from "express";
-import UserModel from "../domain/user.model";
+import UserUseCase from '../application/user.usecase';
+import { Request, Response } from 'express';
+import UserModel from '../domain/user.model';
 
 export default class UserController {
   constructor(private useCase: UserUseCase) {}
 
   async list(req: Request, res: Response) {
-    const result = await this.useCase.list({}, ["roles"]);
+    const result = await this.useCase.list({}, ['roles']);
     res.json(result);
   }
 
@@ -19,9 +19,9 @@ export default class UserController {
 
   async listByPage(req: Request, res: Response) {
     const page = +req.params.page;
-    const result = await this.useCase.listByPage(page, 20, {}, ["roles"], {}, [
-      "password",
-      "refreshToken",
+    const result = await this.useCase.listByPage(page, 20, {}, ['roles'], {}, [
+      'password',
+      'refreshToken',
     ]);
     res.json(result);
   }

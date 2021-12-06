@@ -1,12 +1,12 @@
-import UserUseCase from "../application/medic.usecase";
-import { Request, Response } from "express";
-import MedicModel from "../domain/medic.model";
+import UserUseCase from '../application/medic.usecase';
+import { Request, Response } from 'express';
+import MedicModel from '../domain/medic.model';
 
 export default class MedicController {
   constructor(private useCase: UserUseCase) {}
 
   async list(req: Request, res: Response) {
-    const result = await this.useCase.list({}, ["roles"]);
+    const result = await this.useCase.list({}, ['roles']);
     res.json(result);
   }
 
@@ -23,7 +23,7 @@ export default class MedicController {
       page,
       20,
       {},
-      ["roles"],
+      ['roles'],
       {},
       []
     );

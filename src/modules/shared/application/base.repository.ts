@@ -1,4 +1,4 @@
-import Result from "./result.interface";
+import Result from './result.interface';
 
 export default interface RepositoryBase<T> {
   list(

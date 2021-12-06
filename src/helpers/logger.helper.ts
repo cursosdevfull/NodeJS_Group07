@@ -1,8 +1,8 @@
 enum TypeLog {
-  INFO = "INFO",
-  ERROR = "ERROR",
-  WARN = "WARN",
-  DEBUG = "DEBUG",
+  INFO = 'INFO',
+  ERROR = 'ERROR',
+  WARN = 'WARN',
+  DEBUG = 'DEBUG',
 }
 
 export default class Logger {
@@ -24,21 +24,21 @@ export default class Logger {
 
   private static showMessage(typeLog: TypeLog, message: string | object): void {
     const messageToShow: string =
-      typeof message === "object" ? JSON.stringify(message) : message;
+      typeof message === 'object' ? JSON.stringify(message) : message;
 
-    let color = "";
+    let color = '';
     switch (typeLog) {
       case TypeLog.INFO:
-        color = "#00ff00";
+        color = '#00ff00';
         break;
       case TypeLog.ERROR:
-        color = "#FF0000";
+        color = '#FF0000';
         break;
       case TypeLog.WARN:
-        color = "#FFA500";
+        color = '#FFA500';
         break;
       case TypeLog.DEBUG:
-        color = "#0000FF";
+        color = '#0000FF';
         break;
     }
 

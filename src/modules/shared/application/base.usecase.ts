@@ -1,5 +1,5 @@
-import RepositoryBase from "./base.repository";
-import Result from "./result.interface";
+import RepositoryBase from './base.repository';
+import Result from './result.interface';
 
 export default class UseCaseBase<T, U extends RepositoryBase<T>> {
   constructor(public operation: U) {}
