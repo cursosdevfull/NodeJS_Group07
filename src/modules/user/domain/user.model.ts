@@ -4,7 +4,7 @@ export default interface UserModel {
   email: string;
   password: string;
   refreshToken?: string;
-  photo: string;
+  photo?: string;
   roles: any[];
   active?: boolean;
 }
