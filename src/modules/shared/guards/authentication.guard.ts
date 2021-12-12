@@ -30,7 +30,7 @@ export class AuthenticationGuard {
         next(error);
       }
     } else {
-      const error: IError = new Error('Usuario no encontrados');
+      const error: IError = new Error('Usuario no encontrado');
       error.status = 401;
       next(error);
     }

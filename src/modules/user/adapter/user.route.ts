@@ -3,6 +3,7 @@ import ErrorHandler from '../../../helpers/error.helper';
 import RoleOperation from '../../role/infraestructure/role.operation';
 import { AuthenticationGuard } from '../../shared/guards/authentication.guard';
 import { AuthorizationGuard } from '../../shared/guards/authorization.guard';
+import CacheRedis from '../../shared/middlewares/cache.middleware';
 import UserUseCase from '../application/user.usecase';
 import UserOperation from '../infraestructure/user.operation';
 import UserController from './user.controller';
@@ -17,13 +18,7 @@ route.get(
   '/',
   AuthenticationGuard.canActivate,
   AuthorizationGuard.canActivate('ADMIN'),
-  ErrorHandler.asyncError(controller.list.bind(controller))
-);
-
-route.get(
-  '/',
-  AuthenticationGuard.canActivate,
-  AuthorizationGuard.canActivate('ADMIN'),
+  CacheRedis.handle('LIST_USERS'),
   ErrorHandler.asyncError(controller.list.bind(controller))
 );
 
@@ -41,8 +36,8 @@ route.get(
 );
 route.post(
   '/',
-  /*   AuthenticationGuard.canActivate,
-  AuthorizationGuard.canActivate('ADMIN'), */
+  AuthenticationGuard.canActivate,
+  AuthorizationGuard.canActivate('ADMIN'),
   ErrorHandler.asyncError(controller.insert.bind(controller))
 );
 route.put(

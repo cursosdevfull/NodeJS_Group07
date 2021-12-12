@@ -1,12 +1,17 @@
 import UserUseCase from '../application/user.usecase';
 import { Request, Response } from 'express';
 import UserModel from '../domain/user.model';
+import RedisBootstrap from '../../../bootstrap/redis.bootstrap';
+import Logger from '../../../helpers/logger.helper';
 
 export default class UserController {
   constructor(private useCase: UserUseCase) {}
 
   async list(req: Request, res: Response) {
     const result = await this.useCase.list({}, ['roles']);
+    Logger.info('Ejecución desde MySQL');
+    RedisBootstrap.set(res.locals.cacheKey, JSON.stringify(result));
+
     res.json(result);
   }
 

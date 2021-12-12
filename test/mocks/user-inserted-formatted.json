@@ -1,0 +1,13 @@
+{
+  "trace": "abc",
+  "payload": {
+    "data": [
+      {
+        "id": 2,
+        "name": "Sergio",
+        "email": "sergio@correo.com",
+        "roles": ["ADMIN", "USER"]
+      }
+    ]
+  }
+}
